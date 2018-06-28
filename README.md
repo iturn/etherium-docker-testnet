@@ -13,6 +13,12 @@
 docker-compose up -d
 ```
 
+or running in terminal as process with loggin for all containers
+
+```
+docker-compose up --build
+```
+
 This will build the images and start the containers for:
 
 - 1 Ethereum Bootstrapped container (acts as a primary node for the other nodes to connect)
