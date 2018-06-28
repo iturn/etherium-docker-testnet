@@ -28,12 +28,20 @@ There are 20 pre-funded accounts included.
 Keystore Files can be found in ./files/keystore
 Connect myetherwallet to the private testnet and obtain the private key for use in metamask if desired
 
+To unlock an account for lets say Truffle migrations
+use the docker command below to go into the geth container and run unlock and get first address that now is unlocked
+
+```
+web3.personal.unlockAccount(web3.personal.listAccounts[0],"1234",15000);
+web3.personal.listAccounts[0];
+```
+
 ---
 
 ## Interact with geth via commandline
 
 ```
-docker exec -it *nameofcontainer* geth attach ipc://root/.ethereum/devchain/geth.ipc
+docker exec -it bootstrap geth attach ipc://root/.ethereum/devchain/geth.ipc
 ```
 
 ## Docker cluster management
