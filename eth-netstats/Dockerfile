@@ -2,8 +2,9 @@ FROM node:8-alpine
 
 RUN apk add --update git
 
-RUN git clone https://github.com/cubedro/eth-netstats
+ADD ./files/timezone /etc/localtime
 
+RUN git clone https://github.com/cubedro/eth-netstats
 WORKDIR /eth-netstats
 
 RUN npm install
