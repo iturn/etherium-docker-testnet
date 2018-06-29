@@ -5,8 +5,6 @@ services:
     build: 
       context: ./
       dockerfile: ./monitored-geth-client/Dockerfile
-    restart: always
-    container_name: bootstrap
     hostname: bootstrap
     links:
       - netstats
@@ -21,7 +19,6 @@ services:
     build: 
       context: ./
       dockerfile: ./monitored-geth-client/Dockerfile
-    restart: always
     links:
       - bootstrap
       - netstats
@@ -32,8 +29,6 @@ services:
     build: 
       context: ./
       dockerfile: ./eth-netstats/Dockerfile
-    restart: always
-    container_name: netstats
     environment:
       - WS_SECRET=eth-net-stats-secret
     ports:
@@ -41,7 +36,5 @@ services:
   
   addons:
     build: addons
-    restart: on-failure
-    container_name: addons
     ports:
       - "8080:80"

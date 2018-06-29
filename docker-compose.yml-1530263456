@@ -1,0 +1,39 @@
+services:
+  addons:
+    mem_limit: 256000000
+    image: stijno24/etheriumdockertestnet_addons:1530263456
+    ports:
+      - 8080:80
+  bootstrap:
+    mem_limit: 512000000
+    command: --datadir=~/.ethereum/devchain --identity "ethereum-testnet" --fast --rpc
+      --rpcaddr "0.0.0.0" --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"
+      --ws --wsaddr "0.0.0.0" --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322
+      --nodiscover --verbosity 3 --rpccorsdomain="*" --networkid=1618
+    entrypoint: /root/start.sh
+    hostname: bootstrap
+    image: stijno24/etheriumdockertestnet_bootstrap:1530263456
+    links:
+      - netstats
+    ports:
+      - 30303:30303
+      - 30303:30303/udp
+      - 8545:8545
+  ethminer:
+    mem_limit: 768000000
+    command: --datadir=~/.ethereum/devchain --rpcapi "db,personal,eth,net,web3" --rpccorsdomain="*"
+      --networkid=1618 --rpc --fast --rpcaddr="0.0.0.0" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@XXX:30303"
+      --mine --minerthreads=1
+    entrypoint: /root/start.sh
+    image: stijno24/etheriumdockertestnet_ethminer:1530263456
+    links:
+      - bootstrap
+      - netstats
+  netstats:
+    mem_limit: 256000000
+    environment:
+      - WS_SECRET=eth-net-stats-secret
+    image: stijno24/etheriumdockertestnet_netstats:1530263456
+    ports:
+      - 3000:3000
+version: '2'
