@@ -5,7 +5,7 @@ services:
     build: 
       context: ./
       dockerfile: ./monitored-geth-client/Dockerfile
-    hostname: bootstrap
+    restart: always
     links:
       - netstats
     entrypoint: /root/start.sh
@@ -19,6 +19,7 @@ services:
     build: 
       context: ./
       dockerfile: ./monitored-geth-client/Dockerfile
+    restart: always
     links:
       - bootstrap
       - netstats
@@ -29,6 +30,7 @@ services:
     build: 
       context: ./
       dockerfile: ./eth-netstats/Dockerfile
+    restart: always
     environment:
       - WS_SECRET=eth-net-stats-secret
     ports:
