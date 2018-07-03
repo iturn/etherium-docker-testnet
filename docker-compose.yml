@@ -9,7 +9,7 @@ services:
     links:
       - netstats
     entrypoint: /root/start.sh
-    command: '--datadir=~/.ethereum/devchain --identity "ethereum-testnet" --fast --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3" --ws --wsaddr "0.0.0.0" --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --nodiscover --verbosity 3 --rpccorsdomain="*" --networkid=1618 --unlock "0, 1"  --password "/root/files/password"'
+    command: '--datadir=~/.ethereum/devchain --identity "ethereum-testnet" --fast --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3" --ws --wsaddr "0.0.0.0" --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --nodiscover --verbosity 3 --rpccorsdomain="*" --networkid=1618 --unlock "0"  --password "/root/files/password"'
 
     ports:
       - "30303:30303"
